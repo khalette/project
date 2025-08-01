@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Interactive Animation</title>
+</head>
+<body>
+    <div class="container">
+        <button id="animateButton" class="animate">Click Me!</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+}
+
+button {
+    padding: 20px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.animate {
+    background-color: #3498db;
+    color: white;
+}
+
+.animate.clicked {
+    background-color: #e74c3c;
+    transform: scale(1.2);
+}
+
+.animate.time-trigger {
+    background-color: #2ecc71;
+    transform: scale(1);
+    transition: transform 0.5s, background-color 0.5s;
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('animateButton');
+    
+    // Function to add a class to trigger animations
+    function triggerAnimation(element, className) {
+        element.classList.add(className);
+        setTimeout(() => {
+            element.classList.remove(className);
+        }, 500); // Duration for which class is applied
+    }
+
+    // Button click event
+    button.addEventListener('click', () => {
+        triggerAnimation(button, 'clicked');
+    });
+
+    // Time-based trigger
+    setTimeout(() => {
+        triggerAnimation(button, 'time-trigger');
+    }, 3000); // Change after 3 seconds
+});
